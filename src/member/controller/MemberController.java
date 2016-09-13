@@ -114,4 +114,45 @@ public class MemberController {
 		mav.addObject("list", list);
 		return mav;
 	}
+	
+	@RequestMapping(value="/userRank.member")
+	   public ModelAndView userRank(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
+	      
+	      int pageSize = 5;
+			String pageNum = arg0.getParameter("pageNum");
+			if (pageNum == null){
+				pageNum = "1";
+			}
+			int currentPage = Integer.parseInt(pageNum);
+			int startRow = pageSize*(currentPage-1)+1;
+			int endRow = startRow + pageSize -1;
+			int count = memberDAO.count();
+			if (endRow>count) endRow = count;
+				
+			arg0.setAttribute("pageSize", pageSize);
+			arg0.setAttribute("pageNum", pageNum);
+			arg0.setAttribute("currentPage", currentPage);
+			arg0.setAttribute("startRow", startRow);
+			arg0.setAttribute("endRow", endRow);
+			arg0.setAttribute("count", count);		
+//			
+			if (count>0){
+				int pageCount = count/pageSize + (count%pageSize==0 ? 0 : 1);
+				int pageBlock = 3;
+				int startPage = (currentPage-1)/pageBlock * pageBlock + 1;
+				int endPage = startPage + pageBlock - 1;
+				if (endPage>pageCount) endPage = pageCount;
+				
+				arg0.setAttribute("pageCount", pageCount);
+				arg0.setAttribute("pageBlock", pageBlock);
+				arg0.setAttribute("startPage", startPage);
+				arg0.setAttribute("endPage", endPage);
+			}
+			
+	      List list = memberDAO.rankList(startRow, endRow);
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("list",list);
+	      mav.setViewName("WEB-INF/mainPage/rank/userRank/userRank.jsp");
+	      return mav;
+	   }
 }

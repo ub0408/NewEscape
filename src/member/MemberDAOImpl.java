@@ -63,4 +63,21 @@ public class MemberDAOImpl implements MemberDAO{
 		return dto;
 	}
 
+
+	@Override
+	public int count() {
+		int res = Member.count();
+		return res;
+	}
+
+
+	@Override
+	public List rankList(int startRow, int endRow) {
+		HashMap map = new HashMap<>();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		List list = Member.rankList(map);
+		return list;	
+	}
+
 }

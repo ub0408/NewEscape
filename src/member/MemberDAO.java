@@ -10,4 +10,7 @@ public interface MemberDAO {
 	public void updateMember(MemberDTO dto);
 	public MemberDTO searchMemberId(String id);
 	public MemberDTO searchMemberName(String name);
+	
+	public int count();
+	public List rankList(int startRow, int endRow);
 }

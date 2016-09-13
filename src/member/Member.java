@@ -4,6 +4,7 @@ import com.ibatis.common.resources.Resources;
 
 import java.io.Reader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -82,5 +83,20 @@ public class Member {
 		session.commit();
 		session.close();
 		return dto;
+	}
+	
+	public static List rankList(HashMap map) {
+		List list = null;
+		SqlSession session = sqlMapper.openSession();
+		list = session.selectList("rankList", map);
+		session.close();
+		return list;
+	}
+	
+	public static int count(){
+		SqlSession session = sqlMapper.openSession();
+		int res = session.selectOne("count");
+		session.close();
+		return res;
 	}
 }
