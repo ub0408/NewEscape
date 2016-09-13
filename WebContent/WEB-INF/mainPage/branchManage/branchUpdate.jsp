@@ -19,7 +19,7 @@
 		<c:set var="phonenumber" value="${dto.branch_phone }"/>
 		<c:set var="phone" value="${fn:split(phonenumber, '-') }"/>
 		
-		<input type="text" name="phone1" maxlength="3" size="3" value="${phone[0] }"> - 
+		<input type="text" name="phone1" maxlength="3" size="3" value="${phone[0] }"> ---
 		<input type="text" name="phone2" maxlength="4" size="3" value="${phone[1] }"> - 
 		<input type="text" name="phone3" maxlength="4" size="3" value="${phone[2] }">
 		</td>
