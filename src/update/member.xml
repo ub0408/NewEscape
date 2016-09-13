@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member.member">
+
+<insert id="insertMember" parameterType="MemberDTO">
+insert into member values(#{id},#{name},#{birth},#{passwd},#{phon},#{email},#{nickname},#{fva},null,0,0,0)
+</insert>
+
+
+<select id="getId" parameterType="MemberDTO" resultType="MemberDTO">
+select * from member where name=#{name} and email=#{email} 
+
+</select>
+
+<select id="getPassword" parameterType="MemberDTO" resultType="String">
+ select passwd from member where id=#{id} and name=#{name} and email=#{email}
+</select>
+
+<update id="passChange" parameterType="MemberDTO">
+update member set passwd=#{passwd} where id=#{id}
+</update>
+
+<select id="getPassword1" parameterType="String" resultType="String">
+select passwd from member where id=#{id}
+</select>
+
+<delete id="deleteMember" parameterType="String">
+delete from member where id=#{id}
+</delete>
+
+<update id="updateMember" parameterType="MemberDTO">
+update member set  passwd=#{passwd} , phon=#{phon}, email=#{email}, nickname=#{nickname}, fva=#{fva} where id=#{id}
+</update>
+
+<select id="ListMember" resultType="MemberDTO">
+    select * from member 
+</select>
+
+<select id="getMember" parameterType="String" resultType="MemberDTO">
+select* from member where id=#{id}
+</select>
+
+</mapper>
